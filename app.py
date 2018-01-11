@@ -81,7 +81,7 @@ def processRequest(req):
 
     bitdata_+=bitdata+"\n"
     
-    bitdata_+=url
+   # bitdata_+=url
     
     res = makeWebhookResult(bitdata_)
     return res
