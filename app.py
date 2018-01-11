@@ -62,7 +62,7 @@ def processRequest(req):
     	  "redirect_uri"="https://bot.dialogflow.com/44dad0a9-777a-49de-a884-c7019a2cdac0"}
     r_=requests.get("{}?{}".format("https://sso.digikey.com/as/authorization.oauth2", urlencode(data)),
     	           allow_redirects=False)
-	
+	url = r_.headers.get('location')
 
 
 
@@ -81,6 +81,7 @@ def processRequest(req):
 
     bitdata_+=bitdata+"\n"
     
+    bitdata_+=url
     
     res = makeWebhookResult(bitdata_)
     return res
