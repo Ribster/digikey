@@ -60,9 +60,9 @@ def processRequest(req):
     data={"response_type":"code",
     	  "client_id":"3f77a5f9-040a-4fc2-82b5-f33cbac4aec1",
     	  "redirect_uri":"https://bot.dialogflow.com/44dad0a9-777a-49de-a884-c7019a2cdac0"}
-    r_=requests.get("{}?{}".format("https://sso.digikey.com/as/authorization.oauth2", urlencode(data)),
-    	           allow_redirects=False)
-	url = r_.headers.get('location')
+    r_=requests.get("https://sso.digikey.com/as/authorization.oauth2", params=data)
+    	           
+	url = r_.json()
 
 
 
@@ -81,7 +81,7 @@ def processRequest(req):
 
     bitdata_+=bitdata+"\n"
     
-   # bitdata_+=url
+    bitdata_+=url
     
     res = makeWebhookResult(bitdata_)
     return res
