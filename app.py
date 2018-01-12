@@ -25,26 +25,18 @@ app = Flask(__name__)
 def webhook():
 
 	error=request.args.get('error','')
-	
-	if error:
-
-		r=make_response(makeWebhookResult("omg"))
-	
 	code = request.args.get('code')
+	if error:
+		r=make_response(makeWebhookResult("omg"))
 
-	if code:
+	elif code:
 		r=make_response(makeWebhookResult("we got code yeah!"))
 
 	else:
-
-
-
     	req = request.get_json(silent=True, force=True)
     	print("Request:")
     	print(json.dumps(req, indent=4))
-
-    
-    	#print 'API.AI Parameters'
+     	#print 'API.AI Parameters'
     	#print json.dumps(parameters, indent=4)
     	processRequest(req)
     	
@@ -54,7 +46,6 @@ def webhook():
     return r
 
 def make_authorization():
-
     data = {"response_type":"code",
         	"client_id":"3f77a5f9-040a-4fc2-82b5-f33cbac4aec1",
         	"redirect_uri":"https://digikeybot.herokuapp.com/webhook"}
