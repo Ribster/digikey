@@ -41,48 +41,19 @@ def webhook():
 def processRequest(req):
     if req.get("result").get("action") != "BitcoinPrice":
         return {}
-    cryptocurrency=req['result']['parameters'].get('any')
-    #cryptocurrency="btc_krw"
-    bitdata_=""
-    #for cryptocurrency in ["btc_krw", "bch_krw", "eth_krw", "xrp_krw"]:
-    if cryptocurrency =="1":
-    	cryptocurrency="btc_krw"
-    elif cryptocurrency =="2":
-    	cryptocurrency="bch_krw"
-    elif cryptocurrency =="3":
-    	cryptocurrency="eth_krw"
-    elif cryptocurrency =="4":
-    	cryptocurrency="xrp_krw"
-    payload={"currency_pair": cryptocurrency}
-    r= requests.get("https://api.korbit.co.kr/v1/ticker/detailed", params=payload)
-    contents = r.json()
+    
 
     data = {"response_type":"code",
         "client_id":"3f77a5f9-040a-4fc2-82b5-f33cbac4aec1",
-        "redirect_uri":"https://digikeybot.herokuapp.com/webhook"}
+        "redirect_uri":"https://digikeybot.herokuapp.com/"}
 
-	r = requests.post("https://sso.digikey.com/as/authorization.oauth2?",
-                     allow_redirects=False)
+	r = requests.post("https://sso.digikey.com/as/authorization.oauth2",data=data)
 
+	data = json.loads(r.text)
 
+	bitdata_=data
 
-
-
-
-
-
-
-
-    '''time=datetime.datetime.fromtimestamp(contents['timestamp']/1000)
-    time=time.strftime("%Y-%m-%d %H:%M:%S")'''
-
-    bitdata=cryptocurrency+"\n"+\
-    "체결가:"+contents['last']+"\n"+\
-    "24시간 저가:"+contents['low']+"\n"+\
-    "24시간 고가:"+contents['high']+"\n"+\
-    "거래량:"+contents['volume']
-
-    bitdata_+=bitdata+"\n"
+   
     
     
     
