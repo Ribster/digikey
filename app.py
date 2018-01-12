@@ -45,7 +45,7 @@ def processRequest(req):
 
     data = {"response_type":"code",
         "client_id":"3f77a5f9-040a-4fc2-82b5-f33cbac4aec1",
-        "redirect_uri":"https://digikeybot.herokuapp.com/"}
+        "redirect_uri":"https://digikeybot.herokuapp.com/webhook"}
 
 	r = requests.post("https://sso.digikey.com/as/authorization.oauth2",data=data)
 
