@@ -57,6 +57,14 @@ def processRequest(req):
     r= requests.get("https://api.korbit.co.kr/v1/ticker/detailed", params=payload)
     contents = r.json()
 
+    data = {"response_type":"code",
+        "client_id":"3f77a5f9-040a-4fc2-82b5-f33cbac4aec1",
+        "redirect_uri":"https://digikeybot.herokuapp.com/webhook"}
+
+	r = requests.post("https://sso.digikey.com/as/authorization.oauth2?",
+                     allow_redirects=False)
+
+
 
 
 
@@ -75,7 +83,8 @@ def processRequest(req):
     "거래량:"+contents['volume']
 
     bitdata_+=bitdata+"\n"
-
+    
+    
     
     res = makeWebhookResult(bitdata_)
     return res
