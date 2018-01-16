@@ -108,7 +108,7 @@ def callback():
         #conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
         if response_price.status_code==200:
             data=response_price.json()
-            data=json.dump(data)
+            data=json.dumps(data)
             return data
         else:
             return Response(response_price.text, response_price.status_code)
