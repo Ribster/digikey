@@ -73,9 +73,23 @@ def callback():
         response=requests.post("https://sso.digikey.com/as/token.oauth2",
                                headers=headers,
                                data=post_data)
-		
+        token_json=response.json()
+        access_token=token_json["access_token"]
+        refresh_token=token_json["refresh_token"]
+	
+        post_data_refresh={"client_id":"CLIENT_ID",
+			   "client_secret":CLIENT_SECRET,
+			   "refresh_token":refresh_token,
+			   "grant_type":"refresh_token"}
+        response_refresh=requests.post("https://sso.digikey.com/as/token.oauth2",
+				       headers=headers,
+				       data=post_data_refresh)
+        token_json_=response_refresh.json()
+        access_token_=token_json_["access_token"]
+        refresh_token_=token_json_["refresh_token"]
+	
         
-        return response.text
+        return "access_token: "+access_token_ +" refresh_token: "+refresh_token_
         '''
         if token_json["access_token"]:
             return "access_token: " + token_json["access_token"]
