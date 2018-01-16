@@ -88,7 +88,7 @@ def callback():
         access_token_=token_json_["access_token"]
         refresh_token_=token_json_["refresh_token"]
         conn = http.client.HTTPSConnection("api.digikey.com")
-        payload = "{\"Part\":\"itiles\"}"
+        payload = "{\"Part\":\"AK4388AET\"}"
         headers = {
     'x-ibm-client-id': CLIENT_ID,
     'content-type': "application/json",
