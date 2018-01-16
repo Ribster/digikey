@@ -94,7 +94,7 @@ def callback():
     'content-type': "application/json",
     'accept': "application/json",
     'x-digikey-locale-site': "KR",
-    'x-digikey-locale-language': "en", #ko?
+    'x-digikey-locale-language': "ko", #ko?
     'x-digikey-locale-currency': "KRW",
     'x-digikey-locale-shiptocountry': "",
     'x-digikey-customer-id': "",
