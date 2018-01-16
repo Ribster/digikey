@@ -106,8 +106,9 @@ def callback():
         conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
         res = conn.getresponse()
         data = res.read()
-        return data.text
-        #return data.decode("utf-8")
+        #data=data.decode("utf-8")
+        
+        return data
         
         
 	
