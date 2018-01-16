@@ -62,14 +62,14 @@ def callback():
     code=request.args.get('code')
     if code:
         return code
-        '''post_data={"code":code,
+        post_data={"code":code,
 		   "client_id":CLIENT_ID,
 		   "client_secret":CLIENT_SECRET,
 		   "redirect_uri":REDIRECT_URI,
 		   "grant_type":"authorization_code"}
         
 
-        headers={"Content-Type":"application/x-www-form-urlencoded"}
+        headers={"content-type":"application/x-www-form-urlencoded"}
         response=requests.post("https://sso.digikey.com/as/token.oauth2",
                                headers=headers,
                                data=post_data)
@@ -79,7 +79,7 @@ def callback():
         if token_json["access_token"]:
             return token_json["access_token"]
         else:
-            return "No token"'''
+            return "No token"
 	
 	
 		   
