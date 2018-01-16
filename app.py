@@ -111,7 +111,7 @@ def callback():
         else:
             return Response(response_price.text, response_price.status_code)
 	
-	'''
+        '''
         res=response_price.json()
         #res = conn.getresponse()
         data=res['UnitPrice'['PartDetails']]
