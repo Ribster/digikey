@@ -108,11 +108,11 @@ def callback():
         #conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
         res=response_price.json()
         #res = conn.getresponse()
-        data=res['UnitPrice']
+        #data=res['UnitPrice']
         #data = res.read()
         #data=data.decode("utf-8")
         
-        return data
+        return res
         
         
 	
