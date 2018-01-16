@@ -27,32 +27,6 @@ def homepage():
     text = '<a href="%s">Authenticate with Digi-Key</a>'
     return text % make_authorization_url()
 
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    error=request.args.get('error','')
-    code=request.args.get('code')
-    if error:
-        r=makeWebhookResult("error")
-        
-
-
-    elif code:
-        r=makeWebhookResult("got code")
-
-    else:
-        req = request.get_json(silent=True, force=True)
-        print("Request:")
-        print(json.dumps(req, indent=4))
-        if req.get("result").get("action") != "PartNum":
-            return {}
-        text = '<a href="%s">Authenticate with Digi-Key</a>'
-        url_hyper=text % make_authorization_url()
-        r=makeWebhookResult("Click! "+make_authorization_url())
-    r=json.dumps(r, indent=4)
-    res=make_response(r) 
-    res.headers['Content-Type']='application/json'
-    return res
-
 
 def make_authorization_url():
     data={"response_type":"code",
