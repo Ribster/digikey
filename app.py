@@ -36,10 +36,9 @@ def webhook():
         return {}
     text = '<a href="%s">Authenticate with Digi-Key</a>'
     url_hyper=text % make_authorization_url()
-    r=makeWebhookResult(url_hyper)
+    r=makeWebhookResult("Click! "+make_authorization_url())
     r=json.dumps(r, indent=4)
-    data=r.read()####
-    res=make_response(data.decode("utf-8")) 
+    res=make_response(r) 
     res.headers['Content-Type']='application/json'
     return res
 
