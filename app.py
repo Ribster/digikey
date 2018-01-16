@@ -13,7 +13,7 @@ import json
 import os
 import datetime
 import http.client
-from flask import redirect
+from flask import redirect, url_for
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -106,7 +106,9 @@ def callback():
         conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
         res = conn.getresponse()
         data = res.read()
-        return data.decode("utf-8")
+        return data.text
+        #return data.decode("utf-8")
+        
         
 	
         
