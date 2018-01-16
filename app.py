@@ -34,7 +34,8 @@ def webhook():
     print(json.dumps(req, indent=4))
     if req.get("result").get("action") != "PartNum":
         return {}
-    return make_authorization_url()
+    
+    return makeWebhookResult(make_authorization_url())
 	
 def make_authorization_url():
     data={"response_type":"code",
