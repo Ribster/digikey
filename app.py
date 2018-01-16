@@ -32,14 +32,9 @@ def webhook():
     req = request.get_json(silent=True, force=True)
     print("Request:")
     print(json.dumps(req, indent=4))
-    if req.get("result").get("action") != "BitcoinPrice":
+    if req.get("result").get("action") != "PartNum":
         return {}
-    data={"response_type":"code",
-          "client_id":CLIENT_ID,
-          "redirect_uri":REDIRECT_URI}
-    url="https://sso.digikey.com/as/authorization.oauth2"#?" + urlencode(data)
-    return requests.post(url, data=data)
-    #redirect
+    return make_authorization_url()
 	
 def make_authorization_url():
     data={"response_type":"code",
