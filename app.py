@@ -89,7 +89,8 @@ def callback():
         token_json_=response_refresh.json()
         access_token_=token_json_["access_token"]
         refresh_token_=token_json_["refresh_token"]
-        conn = http.client.HTTPSConnection("api.digikey.com")
+        
+        #conn = http.client.HTTPSConnection("api.digikey.com")
         payload = "{\"Part\":\"974-1011-1-ND\"}"
         headers = {
     'x-ibm-client-id': CLIENT_ID,
@@ -103,12 +104,15 @@ def callback():
     'x-digikey-partner-id': "",
     'authorization': access_token_
     }
-        conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
-        res = conn.getresponse()
-        data = res.read()
+        response_price=requests.post("https://api.digikey.com/services/partsearch/v2/partdetails", data=payload, headers=headers)
+        #conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
+        res=response_price.json()
+        #res = conn.getresponse()
+        data=res['UnitPrice']
+        #data = res.read()
         #data=data.decode("utf-8")
         
-        return data['UnitPrice']
+        return data
         
         
 	
