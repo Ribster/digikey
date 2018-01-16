@@ -61,7 +61,7 @@ def callback():
         abort(403)
     code=request.args.get('code')
     if code:
-        return code
+        #return code
         post_data={"code":code,
 		   "client_id":CLIENT_ID,
 		   "client_secret":CLIENT_SECRET,
