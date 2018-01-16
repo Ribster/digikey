@@ -87,10 +87,29 @@ def callback():
         token_json_=response_refresh.json()
         access_token_=token_json_["access_token"]
         refresh_token_=token_json_["refresh_token"]
+        conn = http.client.HTTPSConnection("api.digikey.com")
+        payload = "{\"Part\":\"itiles\"}"
+        headers = {
+    'x-ibm-client-id': CLIENT_ID,
+    'content-type': "application/json",
+    'accept': "application/json",
+    'x-digikey-locale-site': "KR",
+    'x-digikey-locale-language': "en", #ko?
+    'x-digikey-locale-currency': "KRW",
+    'x-digikey-locale-shiptocountry': "",
+    'x-digikey-customer-id': "",
+    'x-digikey-partner-id': "",
+    'authorization': access_token_
+    }
+        conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
+        res = conn.getresponse()
+        data = res.read()
+        return data.decode("utf-8")
+        
 	
         
-        return "access_token: "+access_token_ +" refresh_token: "+refresh_token_
-        '''
+        '''return "access_token: "+access_token_ +" refresh_token: "+refresh_token_
+        
         if token_json["access_token"]:
             return "access_token: " + token_json["access_token"]
         else:
