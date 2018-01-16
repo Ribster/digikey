@@ -107,7 +107,8 @@ def callback():
         response_price=requests.post("https://api.digikey.com/services/partsearch/v2/partdetails", data=payload, headers=headers)
         #conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
         if response_price.status_code==200:
-            return jsonify(response_price.json())
+            data=response_price.json()
+            return data['PartDetails'['UnitPrice']]
         else:
             return Response(response_price.text, response_price.status_code)
 	
