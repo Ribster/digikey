@@ -40,7 +40,7 @@ def is_valid_state(state):
 @app.route('/callback')
 def callback():
     error=request.args.get('error','')
-    code=request.args.get('code')
+
     if error:
         return "Error: "+error
     state=request.args.get('state','')
@@ -75,6 +75,8 @@ def callback():
         access_token_=token_json_["access_token"]
         refresh_token_=token_json_["refresh_token"]
         part_num=input("\nPart Number >>> ")
+        return part_num
+'''
         conn = http.client.HTTPSConnection("api.digikey.com")
         payload = "{\"Part\":part_num}"
         headers = {
@@ -99,7 +101,7 @@ def callback():
         
         return data
         
-        
+        '''
 	
         
         '''return "access_token: "+access_token_ +" refresh_token: "+refresh_token_
