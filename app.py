@@ -77,7 +77,7 @@ def callback():
         token_json=response.json()
         
         if token_json["access_token"]:
-            return token_json["access_token"]
+            return "access_token: " + token_json["access_token"]
         else:
             return "No token"
 	
