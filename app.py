@@ -15,7 +15,7 @@ import datetime
 import http.client
 from flask import redirect, url_for
 from flask import Flask
-from flask import request
+from flask import request, jsonify
 from flask import make_response
 CLIENT_ID = "3f77a5f9-040a-4fc2-82b5-f33cbac4aec1"
 CLIENT_SECRET = "wY0nF1oV0xG7qQ0dC8dK2hB7wW4tW2rO4oI7pI3fN6oW7qH5yL"
@@ -106,13 +106,19 @@ def callback():
     }
         response_price=requests.post("https://api.digikey.com/services/partsearch/v2/partdetails", data=payload, headers=headers)
         #conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
+        if response_price.status_code==200:
+            return jsonify(response_price.json())
+        else:
+            return Response(response_price.text, response_price.status_code)
+	
+	'''
         res=response_price.json()
         #res = conn.getresponse()
         data=res['UnitPrice'['PartDetails']]
         #data = res.read()
         #data=data.decode("utf-8")
         
-        return data
+        return data'''
         
         
 	
