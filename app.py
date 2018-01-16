@@ -88,13 +88,13 @@ def callback():
         access_token_=token_json_["access_token"]
         refresh_token_=token_json_["refresh_token"]
         conn = http.client.HTTPSConnection("api.digikey.com")
-        payload = "{\"Part\":\"AK4388AET\"}"
+        payload = "{\"Part\":\"974-1011-1-ND\"}"
         headers = {
     'x-ibm-client-id': CLIENT_ID,
     'content-type': "application/json",
     'accept': "application/json",
     'x-digikey-locale-site': "KR",
-    'x-digikey-locale-language': "ko", #ko?
+    'x-digikey-locale-language': "ko", #en
     'x-digikey-locale-currency': "KRW",
     'x-digikey-locale-shiptocountry': "",
     'x-digikey-customer-id': "",
