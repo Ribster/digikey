@@ -139,7 +139,7 @@ if __name__ == '__main__':
 
     print("Starting app on port %d" % port)
 
-    app.run(debug=True, port=port)#, host='0.0.0.0')
+    app.run(debug=True, port=port, host='0.0.0.0')
 '''#!/usr/bin/env python
 from __future__ import print_function
 from future.standard_library import install_aliases
