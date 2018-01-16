@@ -12,7 +12,7 @@ import requests
 import json
 import os
 import datetime
-
+import http.client
 from flask import redirect, url_for
 from flask import Flask
 from flask import request
@@ -90,7 +90,7 @@ def callback():
         access_token_=token_json_["access_token"]
         refresh_token_=token_json_["refresh_token"]
         
-        #conn = http.client.HTTPSConnection("api.digikey.com")
+        conn = http.client.HTTPSConnection("api.digikey.com")
         payload = "{\"Part\":\"974-1011-1-ND\"}"
         headers = {
     'x-ibm-client-id': CLIENT_ID,
@@ -104,23 +104,15 @@ def callback():
     'x-digikey-partner-id': "",
     'authorization': access_token_
     }
-        response_price=requests.post("https://api.digikey.com/services/partsearch/v2/partdetails", data=payload, headers=headers)
-        #conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
-        if response_price.status_code==200:
-            data=response_price.json()
-            data=json.dumps(data)
-            return data
-        else:
-            return Response(response_price.text, response_price.status_code)
-	
-        '''
-        res=response_price.json()
-        #res = conn.getresponse()
-        data=res['UnitPrice'['PartDetails']]
-        #data = res.read()
-        #data=data.decode("utf-8")
         
-        return data'''
+        conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
+
+        res = conn.getresponse()
+
+        data = res.read()
+        data=data.decode("utf-8")
+        
+        return data
         
         
 	
