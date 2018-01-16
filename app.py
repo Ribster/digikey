@@ -77,7 +77,7 @@ def callback():
         access_token=token_json["access_token"]
         refresh_token=token_json["refresh_token"]
 	
-        post_data_refresh={"client_id":"CLIENT_ID",
+        post_data_refresh={"client_id":CLIENT_ID,
 			   "client_secret":CLIENT_SECRET,
 			   "refresh_token":refresh_token,
 			   "grant_type":"refresh_token"}
