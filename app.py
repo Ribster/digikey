@@ -12,10 +12,10 @@ import requests
 import json
 import os
 import datetime
-import http.client
+
 from flask import redirect, url_for
 from flask import Flask
-from flask import request, jsonify
+from flask import request
 from flask import make_response
 CLIENT_ID = "3f77a5f9-040a-4fc2-82b5-f33cbac4aec1"
 CLIENT_SECRET = "wY0nF1oV0xG7qQ0dC8dK2hB7wW4tW2rO4oI7pI3fN6oW7qH5yL"
@@ -108,7 +108,8 @@ def callback():
         #conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
         if response_price.status_code==200:
             data=response_price.json()
-            return data['PartDetails'['UnitPrice']]
+            data=json.dump(data)
+            return data
         else:
             return Response(response_price.text, response_price.status_code)
 	
