@@ -75,7 +75,7 @@ def callback():
                                data=post_data)
 		
         
-        return response
+        return response.text
         '''
         if token_json["access_token"]:
             return "access_token: " + token_json["access_token"]
