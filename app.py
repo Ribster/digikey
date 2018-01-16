@@ -74,12 +74,13 @@ def callback():
                                headers=headers,
                                data=post_data)
 		
-        token_json=response.json()
-        
+        token_json=json.dump(response)
+	return token_json
+        '''
         if token_json["access_token"]:
             return "access_token: " + token_json["access_token"]
         else:
-            return "No token"
+            return "No token"'''
 	
 	
 		   
