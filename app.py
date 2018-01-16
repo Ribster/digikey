@@ -38,11 +38,11 @@ def webhook():
     url_hyper=text % make_authorization_url()
     r=makeWebhookResult(url_hyper)
     r=json.dumps(r, indent=4)
-    res=make_response(r) 
+    data=r.read()####
+    res=make_response(data.decode("utf-8")) 
     res.headers['Content-Type']='application/json'
     return res
 
-	
 
 def make_authorization_url():
     data={"response_type":"code",
