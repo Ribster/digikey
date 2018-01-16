@@ -34,7 +34,9 @@ def webhook():
     print(json.dumps(req, indent=4))
     if req.get("result").get("action") != "PartNum":
         return {}
-    r=makeWebhookResult(make_authorization_url())
+    text = '<a href="%s">Authenticate with Digi-Key</a>'
+    url_hyper=text % make_authorization_url()
+    r=makeWebhookResult(url_hyper)
     r=json.dumps(r, indent=4)
     res=make_response(r)
     res.headers['Content-Type']='application/json'
