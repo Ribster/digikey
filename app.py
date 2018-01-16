@@ -19,7 +19,7 @@ from flask import request
 from flask import make_response
 CLIENT_ID = "3f77a5f9-040a-4fc2-82b5-f33cbac4aec1"
 CLIENT_SECRET = "wY0nF1oV0xG7qQ0dC8dK2hB7wW4tW2rO4oI7pI3fN6oW7qH5yL"
-REDIRECT_URI = "https://digikeybot.herokuapp.com/callback"
+REDIRECT_URI = "https://digikeybot.herokuapp.com/webhook"
 # Flask app should start in global layout
 app = Flask(__name__)
 @app.route('/')
@@ -29,14 +29,25 @@ def homepage():
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    req = request.get_json(silent=True, force=True)
-    print("Request:")
-    print(json.dumps(req, indent=4))
-    if req.get("result").get("action") != "PartNum":
-        return {}
-    text = '<a href="%s">Authenticate with Digi-Key</a>'
-    url_hyper=text % make_authorization_url()
-    r=makeWebhookResult("Click! "+make_authorization_url())
+    error=request.args.get('error','')
+    code=request.args.get('code')
+    if error:
+        r=makeWebhookResult("error")
+        
+
+
+    elif code:
+        r=makeWebhookResult("got code")
+
+    else:
+        req = request.get_json(silent=True, force=True)
+        print("Request:")
+        print(json.dumps(req, indent=4))
+        if req.get("result").get("action") != "PartNum":
+            return {}
+        text = '<a href="%s">Authenticate with Digi-Key</a>'
+        url_hyper=text % make_authorization_url()
+        r=makeWebhookResult("Click! "+make_authorization_url())
     r=json.dumps(r, indent=4)
     res=make_response(r) 
     res.headers['Content-Type']='application/json'
