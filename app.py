@@ -55,7 +55,7 @@ def is_valid_state(state):
 
 @app.route('/callback')
 def callback():
-    error=request.args.get('error','')
+    '''error=request.args.get('error','')
 
     if error:
         return "Error: "+error
@@ -63,10 +63,10 @@ def callback():
     if not is_valid_state(state):
         abort(403)
     code=request.args.get('code')
-    return code
-    '''if code:
+    return code'''
+    if code:
         #return code
-        post_data={"code":code,
+        post_data={"code":CODE,
 		   "client_id":CLIENT_ID,
 		   "client_secret":CLIENT_SECRET,
 		   "redirect_uri":REDIRECT_URI,
@@ -92,9 +92,10 @@ def callback():
         access_token_=token_json_["access_token"]
         refresh_token_=token_json_["refresh_token"]
         #part_num=input("\nPart Number >>> ")
-        return refresh_token_'''
-'''
+        
+
         conn = http.client.HTTPSConnection("api.digikey.com")
+        part_num="AK4388AET"
         payload = "{\"Part\":part_num}"
         headers = {
     'x-ibm-client-id': CLIENT_ID,
@@ -118,7 +119,7 @@ def callback():
         
         return data
         
-        '''
+        
 	
         
 '''return "access_token: "+access_token_ +" refresh_token: "+refresh_token_
