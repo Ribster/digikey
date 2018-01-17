@@ -79,7 +79,7 @@ def callback():
                                headers=headers,
                                data=post_data)
         token_json=response.json()
-        return token_json
+        return token_json.text
         '''access_token=token_json["access_token"]
         refresh_token=token_json["refresh_token"]
 	
