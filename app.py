@@ -17,11 +17,11 @@ from flask import redirect, url_for
 from flask import Flask
 from flask import request
 from flask import make_response
-CLIENT_ID = "3f77a5f9-040a-4fc2-82b5-f33cbac4aec1"
-CLIENT_SECRET = "wY0nF1oV0xG7qQ0dC8dK2hB7wW4tW2rO4oI7pI3fN6oW7qH5yL"
-REDIRECT_URI = "https://digikeybot.herokuapp.com/callback"
-CODE="LDC23w5hTeUGppvvhTmvarE1nwTGcnTOYDxXmwAE"
-ACCESS_TOKEN="B6CMxleDHW8VIgXU03mEefsskLnI"
+CLIENT_ID = 
+CLIENT_SECRET =
+REDIRECT_URI = 
+CODE=
+ACCESS_TOKEN=
 # Flask app should start in global layout
 app = Flask(__name__)
 @app.route('/')
