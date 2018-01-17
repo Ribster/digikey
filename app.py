@@ -63,8 +63,9 @@ def callback():
     if not is_valid_state(state):
         abort(403)
     code=request.args.get('code')
-    return code
-    if code:'''
+    return code'''
+    code=CODE
+    if code:
         #return code
         post_data={"code":CODE,
 		   "client_id":CLIENT_ID,
