@@ -99,7 +99,7 @@ def callback():
    
         part_num="AK4388AET"
         payload = {
-                   "required": ["AK4388AET"],
+                   "required": "[\"AK4388AET\"]",
                    "type": "object",
                    "properties": {
                                  "Part": {
