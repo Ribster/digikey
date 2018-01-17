@@ -119,7 +119,7 @@ def callback():
         data = res.read()
         data=data.decode("utf-8")
         
-        return data
+        return data['PartDetails']['UnitPrice']
         
         
 	
