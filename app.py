@@ -93,8 +93,9 @@ def callback():
         access_token_=token_json_["access_token"]
         refresh_token_=token_json_["refresh_token"]
         #part_num=input("\nPart Number >>> ")
+        return refresh_token_
         
-
+'''
         conn = http.client.HTTPSConnection("api.digikey.com")
         part_num="AK4388AET"
         payload = "{\"Part\":part_num}"
@@ -118,7 +119,7 @@ def callback():
         data = res.read()
         data=data.decode("utf-8")
         
-        return data
+        return data'''
         
         
 	
