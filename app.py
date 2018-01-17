@@ -21,12 +21,37 @@ CLIENT_ID = "3f77a5f9-040a-4fc2-82b5-f33cbac4aec1"
 CLIENT_SECRET = "wY0nF1oV0xG7qQ0dC8dK2hB7wW4tW2rO4oI7pI3fN6oW7qH5yL"
 REDIRECT_URI = "https://digikeybot.herokuapp.com/callback"
 CODE="LDC23w5hTeUGppvvhTmvarE1nwTGcnTOYDxXmwAE"
+ACCESS_TOKEN="B6CMxleDHW8VIgXU03mEefsskLnI"
 # Flask app should start in global layout
 app = Flask(__name__)
 @app.route('/')
 def homepage():
     text = '<a href="%s">Authenticate with Digi-Key</a>'
     return text % make_authorization_url()
+@app.route('/result')
+def result():
+    part_num="AK4388AET"
+    payload = "{\"Part\":\"%s\"}"%part_num
+    headers = {
+    'x-ibm-client-id': CLIENT_ID,
+    'content-type': "application/json",
+    'accept': "application/json",
+    'x-digikey-locale-site': "KR",
+    'x-digikey-locale-language': "ko", #en
+    'x-digikey-locale-currency': "KRW",
+    'x-digikey-locale-shiptocountry': "",
+    'x-digikey-customer-id': "",
+    'x-digikey-partner-id': "",
+    'authorization': ACCESS_TOKEN
+    }
+        
+    conn=requests.post("https://api.digikey.com/services/partsearch/v2/partdetails", data=payload, headers=headers)
+
+    data=conn.json()
+       
+    data=data['PartDetails']['UnitPrice']
+    data=json.dumps(data)
+    return "UnitPrice: "+data    
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
