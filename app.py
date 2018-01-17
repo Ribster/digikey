@@ -98,7 +98,7 @@ def callback():
 
    
         part_num="AK4388AET"
-        payload = {"Part":part_num}
+        payload = {"Part":"AK4388AET"}
         headers = {
     'x-ibm-client-id': CLIENT_ID,
     'content-type': "application/json",
