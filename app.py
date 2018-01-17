@@ -118,7 +118,7 @@ def callback():
         data = json.dumps(data, indent=4)
 
         
-        return data
+        return data['PartDetails']['UnitPrice']
         
         
 	
