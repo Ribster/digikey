@@ -98,7 +98,15 @@ def callback():
 
    
         part_num="AK4388AET"
-        payload = "{\"Part\":\"AK4388AET\"}"
+        payload = {
+                   "required": ["AK4388AET"],
+                   "type": "object",
+                   "properties": {
+                                 "Part": {
+                                         "type": "string"
+                                         }
+                                  }
+                    }
         headers = {
     'x-ibm-client-id': CLIENT_ID,
     'content-type': "application/json",
