@@ -116,7 +116,7 @@ def callback():
 
         data=conn.json()
         data=json.loads(data)        
-        return data['PartDetails']
+        return data['PartDetails']['UnitPrice']
         
         
 	
