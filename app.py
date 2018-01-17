@@ -63,7 +63,8 @@ def callback():
     if not is_valid_state(state):
         abort(403)
     code=request.args.get('code')
-    if code:
+    return code
+    '''if code:
         #return code
         post_data={"code":code,
 		   "client_id":CLIENT_ID,
@@ -91,7 +92,7 @@ def callback():
         access_token_=token_json_["access_token"]
         refresh_token_=token_json_["refresh_token"]
         #part_num=input("\nPart Number >>> ")
-        return refresh_token_
+        return refresh_token_'''
 '''
         conn = http.client.HTTPSConnection("api.digikey.com")
         payload = "{\"Part\":part_num}"
