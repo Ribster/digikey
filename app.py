@@ -114,7 +114,7 @@ def callback():
         
         conn=requests.post("https://api.digikey.com/services/partsearch/v2/partdetails", data=payload, headers=headers)
 
-        data=json.loads(conn)
+        data=conn.json()
        
         data=data['PartDetails']['UnitPrice']
         data=json.dumps(data)
