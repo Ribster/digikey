@@ -96,7 +96,7 @@ def callback():
         
         
 
-        conn = http.client.HTTPSConnection("api.digikey.com")
+   
         #part_num="AK4388AET"
         payload = "{\"Part\":\"AK4388AET\"}"
         headers = {
@@ -112,14 +112,12 @@ def callback():
     'authorization': access_token_
     }
         
-        conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
+        conn=requests.post("https://api.digikey.com/services/partsearch/v2/partdetails", data=payload, headers=headers)
 
-        res = conn.getresponse()
+        data = conn.json()
 
-        data = res.read()
-        data=data.decode("utf-8")
         
-        return data.json()
+        return data['PartDetails']['UnitPrice']
         
         
 	
