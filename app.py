@@ -20,6 +20,7 @@ from flask import make_response
 CLIENT_ID = "3f77a5f9-040a-4fc2-82b5-f33cbac4aec1"
 CLIENT_SECRET = "wY0nF1oV0xG7qQ0dC8dK2hB7wW4tW2rO4oI7pI3fN6oW7qH5yL"
 REDIRECT_URI = "https://digikeybot.herokuapp.com/callback"
+CODE="DtPMEWQQOFfErIKaUttx6Twlyom88gfoPKV1xQAE"
 # Flask app should start in global layout
 app = Flask(__name__)
 @app.route('/')
@@ -27,6 +28,21 @@ def homepage():
     text = '<a href="%s">Authenticate with Digi-Key</a>'
     return text % make_authorization_url()
 
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    req = request.get_json(silent=True, force=True)
+    print("Request:")
+    print(json.dumps(req, indent=4))
+
+    
+    #print 'API.AI Parameters'
+    #print json.dumps(parameters, indent=4)
+    res = processRequest(req)
+    res = json.dumps(res, indent=4)
+    # print(res)
+    r = make_response(res)
+    r.headers['Content-Type'] = 'application/json'
+    return r
 
 def make_authorization_url():
     data={"response_type":"code",
@@ -74,8 +90,8 @@ def callback():
         token_json_=response_refresh.json()
         access_token_=token_json_["access_token"]
         refresh_token_=token_json_["refresh_token"]
-        part_num=input("\nPart Number >>> ")
-        return part_num
+        #part_num=input("\nPart Number >>> ")
+        return refresh_token_
 '''
         conn = http.client.HTTPSConnection("api.digikey.com")
         payload = "{\"Part\":part_num}"
@@ -117,36 +133,62 @@ def callback():
 
 
 
-'''
+
 def processRequest(req):
+
+    post_data={"code":CODE,
+        "client_id":CLIENT_ID,
+        "client_secret":CLIENT_SECRET,
+        "redirect_uri":REDIRECT_URI,
+        "grant_type":"authorization_code"}
+        
+
+    headers={"content-type":"application/x-www-form-urlencoded"}
+    response=requests.post("https://sso.digikey.com/as/token.oauth2",
+                           headers=headers,
+                           data=post_data)
+    token_json=response.json()
+    access_token=token_json["access_token"]
+    refresh_token=token_json["refresh_token"]
+	
+    post_data_refresh={"client_id":CLIENT_ID,
+        "client_secret":CLIENT_SECRET,
+        "refresh_token":refresh_token,
+        "grant_type":"refresh_token"}
+    response_refresh=requests.post("https://sso.digikey.com/as/token.oauth2",
+				   headers=headers,
+				   data=post_data_refresh)
+    token_json_=response_refresh.json()
+    access_token_=token_json_["access_token"]
+    refresh_token_=token_json_["refresh_token"]
+    part_num=req['result']['parameters'].get('any')
+    conn = http.client.HTTPSConnection("api.digikey.com")
+    payload = "{\"Part\":part_num}"
+    headers = {
+        'x-ibm-client-id': CLIENT_ID,
+        'content-type': "application/json",
+        'accept': "application/json",
+        'x-digikey-locale-site': "KR",
+        'x-digikey-locale-language': "ko", #en
+        'x-digikey-locale-currency': "KRW",
+        'x-digikey-locale-shiptocountry': "",
+        'x-digikey-customer-id': "",
+        'x-digikey-partner-id': "",
+        'authorization': access_token_}
+        
+    conn.request("POST", "/services/partsearch/v2/partdetails", payload, headers)
+
+    res = conn.getresponse()
+
+    data = res.read()
+    data=data.decode("utf-8")
+
+
+
     
-    cryptocurrency=req['result']['parameters'].get('any')
-    #cryptocurrency="btc_krw"
-    bitdata_=""
-    #for cryptocurrency in ["btc_krw", "bch_krw", "eth_krw", "xrp_krw"]:
-    if cryptocurrency =="1":
-    	cryptocurrency="btc_krw"
-    elif cryptocurrency =="2":
-    	cryptocurrency="bch_krw"
-    elif cryptocurrency =="3":
-    	cryptocurrency="eth_krw"
-    elif cryptocurrency =="4":
-    	cryptocurrency="xrp_krw"
-    payload={"currency_pair": cryptocurrency}
-    r= requests.get("https://api.korbit.co.kr/v1/ticker/detailed", params=payload)
-    contents = r.json()
-    time=datetime.datetime.fromtimestamp(contents['timestamp']/1000)
-    time=time.strftime("%Y-%m-%d %H:%M:%S")
-    bitdata=cryptocurrency+"\n"+\
-    "체결가:"+contents['last']+"\n"+\
-    "24시간 저가:"+contents['low']+"\n"+\
-    "24시간 고가:"+contents['high']+"\n"+\
-    "거래량:"+contents['volume']
-    bitdata_+=bitdata+"\n"
+    result = makeWebhookResult(data['PartDetails']['UnitPrice'])
+    return result
     
-    res = makeWebhookResult(url)
-    return res
-    '''
 
 
 def makeWebhookResult(bitdata):
