@@ -55,7 +55,7 @@ def is_valid_state(state):
 
 @app.route('/callback')
 def callback():
-    '''error=request.args.get('error','')
+    error=request.args.get('error','')
 
     if error:
         return "Error: "+error
@@ -63,11 +63,11 @@ def callback():
     if not is_valid_state(state):
         abort(403)
     code=request.args.get('code')
-    return code'''
-    code=CODE
+    
+    
     if code:
         #return code
-        post_data={"code":CODE,
+        post_data={"code":code,
 		   "client_id":CLIENT_ID,
 		   "client_secret":CLIENT_SECRET,
 		   "redirect_uri":REDIRECT_URI,
@@ -80,7 +80,7 @@ def callback():
                                data=post_data)
         token_json=response.json()
         return token_json.text
-        '''access_token=token_json["access_token"]
+        access_token=token_json["access_token"]
         refresh_token=token_json["refresh_token"]
 	
         post_data_refresh={"client_id":CLIENT_ID,
@@ -119,7 +119,7 @@ def callback():
         data = res.read()
         data=data.decode("utf-8")
         
-        return data'''
+        return data
         
         
 	
