@@ -28,9 +28,9 @@ app = Flask(__name__)
 def homepage():
     text = '<a href="%s">Authenticate with Digi-Key</a>'
     return text % make_authorization_url()
-@app.route('/result')
-def result():
-    part_num="AK4388AET"
+#@app.route('/result')
+def result(part_num):
+    #part_num="AK4388AET"
     payload = "{\"Part\":\"%s\"}"%part_num
     headers = {
     'x-ibm-client-id': CLIENT_ID,
@@ -163,7 +163,7 @@ def callback():
 
 def processRequest(req):
 
-    post_data={"code":CODE,
+    '''post_data={"code":CODE,
         "client_id":CLIENT_ID,
         "client_secret":CLIENT_SECRET,
         "redirect_uri":REDIRECT_URI,
@@ -208,13 +208,13 @@ def processRequest(req):
     res = conn.getresponse()
 
     data = res.read()
-    data=data.decode("utf-8")
+    data=data.decode("utf-8")'''
 
 
 
-    
-    result = makeWebhookResult(data['PartDetails']['UnitPrice'])
-    return result
+    part_num=req['result']['parameters'].get('any')
+    result_ = makeWebhookResult(result(part_num))
+    return result_
     
 
 
