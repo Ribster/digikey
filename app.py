@@ -93,8 +93,8 @@ def callback():
         access_token_=token_json_["access_token"]
         refresh_token_=token_json_["refresh_token"]
         #part_num=input("\nPart Number >>> ")
-        
-        
+        return "access token: "+access_token_ +"refresh token: "+refresh_token_
+        '''
 
    
         part_num="AK4388AET"
@@ -120,7 +120,7 @@ def callback():
         data=json.dumps(data)
         return "UnitPrice: "+data
         
-	
+	'''
         
 '''return "access_token: "+access_token_ +" refresh_token: "+refresh_token_
         
