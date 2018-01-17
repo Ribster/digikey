@@ -79,7 +79,8 @@ def callback():
                                headers=headers,
                                data=post_data)
         token_json=response.json()
-        access_token=token_json["access_token"]
+        return token_json
+        '''access_token=token_json["access_token"]
         refresh_token=token_json["refresh_token"]
 	
         post_data_refresh={"client_id":CLIENT_ID,
@@ -118,7 +119,7 @@ def callback():
         data = res.read()
         data=data.decode("utf-8")
         
-        return data
+        return data'''
         
         
 	
