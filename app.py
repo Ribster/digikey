@@ -93,12 +93,12 @@ def callback():
         access_token_=token_json_["access_token"]
         refresh_token_=token_json_["refresh_token"]
         #part_num=input("\nPart Number >>> ")
-        return refresh_token_
         
-'''
+        
+
         conn = http.client.HTTPSConnection("api.digikey.com")
-        part_num="AK4388AET"
-        payload = "{\"Part\":part_num}"
+        #part_num="AK4388AET"
+        payload = "{\"Part\":\"AK4388AET\"}"
         headers = {
     'x-ibm-client-id': CLIENT_ID,
     'content-type': "application/json",
