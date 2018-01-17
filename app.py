@@ -118,7 +118,7 @@ def callback():
         data = json.dumps(data, indent=4)
 
         
-        return data[0]
+        return data[0][1]
         
         
 	
