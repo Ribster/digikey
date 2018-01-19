@@ -1,6 +1,6 @@
 
 
-This is an application that answers the price of things in Digi-Key. It returns the price by its 'part number'.
+This is an application that answers the price of things in Digi-Key. It returns the price by its 'part number' using Digi-Key APIs.
 
 
 
