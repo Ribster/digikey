@@ -17,11 +17,11 @@ from flask import redirect, url_for
 from flask import Flask
 from flask import request
 from flask import make_response
-CLIENT_ID = #ur clinet id
+CLIENT_ID = #ur clinet id (make environment value in Heroku)
 CLIENT_SECRET = #ur clinet secret
 REDIRECT_URI = #ur redirect uri
 CODE= #ur authorization code
-ACCESS_TOKEN= #ur access token
+ACCESS_TOKEN= #ur access token 
 # Flask app should start in global layout
 app = Flask(__name__)
 
