@@ -1,6 +1,6 @@
 
 
-This is an application with API.AI that answers the price of things in Digi-Key. It returns the price by its 'part number' using Digi-Key APIs.
+This is an application with API.AI that answers the question of price of things in Digi-Key. It returns the price by its 'part number' using Digi-Key APIs.
 
 
 
