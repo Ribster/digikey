@@ -1,5 +1,5 @@
 {
-  "name": "Digi-Key price bot",
+  "name": "Digi-Key price bot with API.AI",
   "description": "Answering the price of things in Digi-Key by using Digi-Key APIs",
   "repository": "https://github.com/JE0903/digikey",
   "logo": "http://xvir.github.io/img/apiai.png",
