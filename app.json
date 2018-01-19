@@ -1,6 +1,6 @@
 {
-  "name": "API.AI webhook demonstration",
-  "description": "API.AI webhook demonstration",
+  "name": "Digi-Key price bot",
+  "description": "Answering the price of things in Digi-Key by using Digi-Key APIs",
   "repository": "https://github.com/JE0903/digikey",
   "logo": "http://xvir.github.io/img/apiai.png",
   "keywords": ["api.ai", "natural language"]
